@@ -17,14 +17,15 @@ debconf-set-selections <<< 'mysql-server mysql-server/root_password password too
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password toor'
 apt-get install mysql-server -y  
 apt-get install php5.6 php5.6-xml php5.6-mbstring php5.6-fpm php5.6-mysql -y
-echo "<?php phpinfo(); ?>" > /var/www/html/info.php
+#echo "<?php phpinfo(); ?>" > /var/www/html/info.php
 git clone git://git.code.sf.net/p/mutillidae/git /var/www/html/mutillidae
 find /var/www/html/mutillidae -type f -exec dos2unix {} {} \;
-sed -i 's/static public $mMySQLDatabaseHost = DB_HOST;/static public $mMySQLDatabaseHost = "127.0.0.1";/g'  /var/www/html/mutillidae/classes/MySQLHandler.php
-sed -i 's/static public $mMySQLDatabaseUsername = DB_USERNAME;/static public $mMySQLDatabaseUsername = "root";/g'  /var/www/html/mutillidae/classes/MySQLHandler.php
-sed -i 's/static public $mMySQLDatabasePassword = DB_PASSWORD;/static public $mMySQLDatabasePassword = "toor";/g'  /var/www/html/mutillidae/classes/MySQLHandler.php
-sed -i 's/static public $mMySQLDatabaseName = DB_NAME;/static public $mMySQLDatabaseName = "mutillidae_testing";/g'  /var/www/html/mutillidae/classes/MySQLHandler.php
-mv /var/www/html/index.html /var/www/html/info.html
+sed -i 's/DB_HOST/"127.0.0.1"/g'  /var/www/html/mutillidae/classes/MySQLHandler.php
+sed -i 's/DB_USERNAME/"root"/g'  /var/www/html/mutillidae/classes/MySQLHandler.php
+sed -i 's/DB_PASSWORD/"toor"/g'  /var/www/html/mutillidae/classes/MySQLHandler.php
+sed -i 's/DB_NAME/"mutillidae"/g'  /var/www/html/mutillidae/classes/MySQLHandler.php
+#mv /var/www/html/index.html /var/www/html/info.html
+rm /var/www/html/index.html
 service apache2 restart
 clear
 echo "The password for MySql root is toor"
