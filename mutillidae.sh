@@ -16,7 +16,7 @@ service apache2 restart
 debconf-set-selections <<< 'mysql-server mysql-server/root_password password toor'
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password toor'
 apt-get install mysql-server -y  
-apt-get install php5.6 php5.6-xml php5.6-mbstring php5.6-fpm php5.6-mysql -y
+apt-get install php5.6 php5.6-xml php5.6-mbstring php5.6-fpm php5.6-mysql php5.6-curl -y
 #echo "<?php phpinfo(); ?>" > /var/www/html/info.php
 git clone git://git.code.sf.net/p/mutillidae/git /var/www/html/mutillidae
 find /var/www/html/mutillidae -type f -exec dos2unix {} {} \;
