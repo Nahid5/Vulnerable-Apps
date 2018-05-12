@@ -17,7 +17,8 @@ debconf-set-selections <<< 'mysql-server mysql-server/root_password password too
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password toor'
 apt-get install mysql-server -y  
 apt-get install php5.6 php5.6-xml php5.6-mbstring php5.6-fpm php5.6-mysql php5.6-curl -y
-#echo "<?php phpinfo(); ?>" > /var/www/html/info.php
+apt-get install libapache2-mod-php5.6
+echo "<?php phpinfo(); ?>" > /var/www/html/info.php
 
 #INSTALLING MUTILLIDAE
 git clone git://git.code.sf.net/p/mutillidae/git /var/www/html/mutillidae
