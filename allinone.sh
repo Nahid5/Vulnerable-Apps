@@ -33,10 +33,12 @@ service apache2 restart
 clear
 
 #INSTALLING DVWA
-wget https://github.com/RandomStorm/DVWA/archive/v1.0.8.zip
-unzip v1.0.8.zip
-mv DVWA-1.0.8 DVWA
+DVWA_VER="$(curl --silent "https://api.github.com/repos/ethicalhack3r/DVWA/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')"  #Get latest version of DVWA
+echo $DVWA_VER
+wget "https://github.com/RandomStorm/DVWA/archive/$DVWA_VER.zip"
+unzip "$DVWA_VER.zip"
+mv "$DVWA_VER" DVWA
 mv DVWA/ /var/www/html/
-rm v1.0.8.zip 
+rm "$DVWA_VER.zip" 
 sed -i 's/localhost/127.0.0.1/g'  /var/www/html/DVWA/config/config.inc.php
 sed -i 's/p@ssw0rd/toor/g'  /var/www/html/DVWA/config/config.inc.php
